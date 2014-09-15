@@ -2,8 +2,8 @@
   "name": "language-todotxt",
   "version": "0.1.0",
   "description": "Syntax Highlighting for todo.txt",
-  "repository": "https://github.com/atom/language-todotxt",
-  "license": "MIT",
+  "repository": "https://github.com/gerane/language-todotxt",
+  "license": "BSD",
   "engines": {
     "atom": ">0.50.0"
   },
