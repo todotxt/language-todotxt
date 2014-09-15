@@ -1,0 +1,27 @@
+'fileTypes': [
+  'txt'
+]
+'name': 'TodoTXT'
+'patterns': [
+  {
+    'match': '^\\([A-Z]\\)'
+    'name': 'constant.language.todotxt.priority'
+  }
+  {
+    'match': 't:\\d{4}-\\d{2}-\\d{2}'
+    'name': 'constant.language.todotxt.date'
+  }
+  {
+    'match': '\\@\\S*'
+    'name': 'entity.name.tag.todotxt.context'
+  }
+  {
+    'match': '\\+\\S*'
+    'name': 'entity.name.tag.todotxt.project'
+  }
+  {
+    'match': '^x\\s.*$'
+    'name': 'comment.line.todotxt'
+  }
+]
+'scopeName': 'text.todotxt'
