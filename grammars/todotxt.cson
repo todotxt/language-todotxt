@@ -12,6 +12,10 @@
     'name': 'constant.language.todotxt.date'
   }
   {
+    'match': 'due:\\d{4}-\\d{2}-\\d{2}'
+    'name': 'constant.language.todotxt.due'
+  }
+  {
     'match': '\\@\\S*'
     'name': 'entity.name.tag.todotxt.context'
   }
