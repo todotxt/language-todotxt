@@ -1,6 +1,6 @@
 {
   "name": "language-todotxt",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Syntax Highlighting for todo.txt",
   "repository": "https://github.com/gerane/language-todotxt",
   "license": "BSD",
