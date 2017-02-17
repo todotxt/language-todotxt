@@ -8,19 +8,19 @@
     'name': 'constant.language.todotxt.priority'
   }
   {
-    'match': 't:\\d{4}-\\d{2}-\\d{2}'
+    'match': '\\s\\d{4}-\\d{2}-\\d{2}'
     'name': 'constant.language.todotxt.date'
   }
   {
-    'match': 'due:\\d{4}-\\d{2}-\\d{2}'
+    'match': '\\s due:\\d{4}-\\d{2}-\\d{2}'
     'name': 'constant.language.todotxt.due'
   }
   {
-    'match': '\\@\\S*'
+    'match': '\\s\\@\\S*'
     'name': 'entity.name.tag.todotxt.context'
   }
   {
-    'match': '\\+\\S*'
+    'match': '\\s\\+\\S*'
     'name': 'entity.name.tag.todotxt.project'
   }
   {
