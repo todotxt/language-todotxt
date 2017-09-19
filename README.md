@@ -39,3 +39,11 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 This project has adopted a [code of conduct](https://github.com/todotxt/language-todotxt/blob/master/CODE_OF_CONDUCT.md)
 in order to be welcoming to all participants.
+
+## Useful packages for todo.txt files
+
+One nice thing about the todo.txt format is that it's easily managed with basic
+text sorting and filtering tools. Here are some that are available for Atom:
+
+- [sort-lines](https://github.com/atom/sort-lines). It sorts lines. Very useful
+  for todo.txt.
