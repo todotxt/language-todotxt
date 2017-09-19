@@ -7,6 +7,8 @@ Originally [converted](http://atom.io/docs/latest/converting-a-text-mate-bundle)
 from the [tmTodoTXT TextMate
 bundle](https://github.com/sideshowcoder/tmTodoTXT).
 
+[![Gitter chat](https://badges.gitter.im/todotxt/language-todotxt.png)](https://gitter.im/todotxt/language-todotxt)
+
 ## License
 
 Copyright (c) 2011, Philipp Fehre philipp.fehre@gmail.com All rights reserved.
