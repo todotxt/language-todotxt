@@ -27,4 +27,48 @@
 
 "use babel";
 
-describe("main module")
+describe("main module", () =>
+
+  let grammar = null;
+
+  beforeEach(() =>
+    waitsForPromise(() =>
+      atom.packages.activatePackage("language-todotxt")
+    );
+    runs(() =>
+      grammar = atom.grammars.grammarForScopeName("text.todotxt");
+    );
+  );
+
+  it("parses the grammar", () =>
+    expect(grammar).toBeTruthy();
+    expect(grammar.scopeName).toBe("text.todotxt");
+  );
+
+  it("selects the grammar for todo.txt files", () =>
+    waitsForPromise(() =>
+      atom.workspace.open("todo.txt");
+    );
+    runs(() =>
+      expect(atom.workspace.getActiveTextEditor().getGrammar()).toBe(grammar);
+    );
+  );
+
+  it("selects the grammar for done.txt files", () =>
+    waitsForPromise(() =>
+      atom.workspace.open("done.txt");
+    );
+    runs(() =>
+      expect(atom.workspace.getActiveTextEditor().getGrammar()).toBe(grammar);
+    );
+  );
+
+  it("doesn't select the grammar for other text files", () =>
+    waitsForPromise(() =>
+      atom.workspace.open("other.txt");
+    );
+    runs(() =>
+      expect(atom.workspace.getActiveTextEditor().getGrammar()).not.toBe(grammar);
+    );
+  );
+);
