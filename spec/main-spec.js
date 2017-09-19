@@ -44,4 +44,34 @@ describe("language-todotxt", () => {
       expect(grammar).toBeTruthy();
       expect(grammar.scopeName).toBe("text.todotxt");
     });
+
+    it("selects the grammar for todo.txt files", () => {
+      waitsForPromise(() => {
+        return atom.workspace.open("todo.txt");
+      });
+
+      runs(() => {
+        expect(atom.workspace.getActiveTextEditor().getGrammar()).toBe(grammar);
+      });
+    });
+
+    it("selects the grammar for done.txt files", () => {
+      waitsForPromise(() => {
+        return atom.workspace.open("done.txt");
+      });
+
+      runs(() => {
+        expect(atom.workspace.getActiveTextEditor().getGrammar()).toBe(grammar);
+      });
+    });
+
+    it("does not select the grammar for other text files", () => {
+      waitsForPromise(() => {
+        return atom.workspace.open("other.txt");
+      });
+
+      runs(() => {
+        expect(atom.workspace.getActiveTextEditor().getGrammar()).not.toBe(grammar);
+      });
+    });
 });
