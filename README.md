@@ -1,5 +1,7 @@
 # language-todotxt package
 
+[![Todo.txt](http://todotxt.org/images/todotxt_logo_2012.png)](http://todotxt.org/)
+
 This package adds syntax highlighting to [todo.txt](http://todotxt.org/) files
 in the [Atom](https://atom.io/) text editor.
 
