@@ -24,8 +24,12 @@
     }
   }
   {
-    'match': '\\+\\S*'
-    'name': 'entity.name.tag.todotxt.project'
+    'match': ' (\\+\\S+)'
+    'captures': {
+      '1': {
+        'name': 'entity.name.tag.todotxt.project'
+      }
+    }
   }
   {
     'match': '^x\\s.*$'
