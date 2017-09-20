@@ -1,5 +1,6 @@
 ## 1.0.1
 * Integration with appveyor
+* Don't overmatch Google+, 2+2 as projects
 
 ## 1.0.0
 * Move to todotxt organization on Github
