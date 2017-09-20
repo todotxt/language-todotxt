@@ -1,6 +1,6 @@
 {
   "name": "language-todotxt",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Syntax Highlighting for todo.txt",
   "repository": "https://github.com/todotxt/language-todotxt",
   "license": "BSD",
