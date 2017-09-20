@@ -95,6 +95,12 @@ describe("language-todotxt", () => {
       expect(matches.length).toEqual(0);
     });
 
+    it("does not overmatch isolated at symbol as context", () => {
+      let {tokens} = grammar.tokenizeLine("2014-09-12 celebrate the @ symbol");
+      let matches = tokens.filter((token) => { return token.value == "@"; });
+      expect(matches.length).toEqual(0);
+    });
+
     it("correctly matches projects at end of line", () => {
       let {tokens} = grammar.tokenizeLine("Post signs around the neighborhood +GarageSale");
       let matches = tokens.filter((token) => { return token.value == "+GarageSale"; });
