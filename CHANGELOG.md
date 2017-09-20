@@ -1,3 +1,15 @@
+## 1.0.1
+* Integration with appveyor
+
+## 1.0.0
+* Move to todotxt organization on Github
+* Only auto-loads for "todo.txt"
+* Doesn't match email addresses as contexts
+* Unit tests
+* Integration with Travis CI
+* Recognize dates at beginning of line
+* Code of conduct
+
 ## 0.6.1
 * Add 'due' date as atom constant
 
