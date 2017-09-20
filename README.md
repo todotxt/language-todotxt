@@ -10,6 +10,7 @@ from the [tmTodoTXT TextMate
 bundle](https://github.com/sideshowcoder/tmTodoTXT).
 
 [![Build Status](https://travis-ci.org/todotxt/language-todotxt.svg?branch=master)](https://travis-ci.org/todotxt/language-todotxt)
+[![Build Status](https://ci.appveyor.com/api/projects/status/oepsrww0c70esa4j/branch/master?svg=true)](https://ci.appveyor.com/project/karbassi/language-todotxt/branch/master)
 [![Gitter chat](https://badges.gitter.im/todotxt/language-todotxt.png)](https://gitter.im/todotxt/language-todotxt)
 
 ## License
