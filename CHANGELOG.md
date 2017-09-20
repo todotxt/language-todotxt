@@ -1,3 +1,6 @@
+## 1.0.2
+* Don't overmatch empty @ symbol
+
 ## 1.0.1
 * Integration with appveyor
 * Don't overmatch Google+, 2+2 as projects
