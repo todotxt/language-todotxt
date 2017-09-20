@@ -1,6 +1,5 @@
 'fileTypes': [
   'todo.txt'
-  'done.txt'
 ]
 'name': 'TodoTXT'
 'patterns': [

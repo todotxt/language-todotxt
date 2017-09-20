@@ -55,13 +55,13 @@ describe("language-todotxt", () => {
       });
     });
 
-    it("selects the grammar for done.txt files", () => {
+    it("does not select the grammar for done.txt files", () => {
       waitsForPromise(() => {
         return atom.workspace.open("done.txt");
       });
 
       runs(() => {
-        expect(atom.workspace.getActiveTextEditor().getGrammar()).toBe(grammar);
+        expect(atom.workspace.getActiveTextEditor().getGrammar()).not.toBe(grammar);
       });
     });
 
