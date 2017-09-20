@@ -74,4 +74,25 @@ describe("language-todotxt", () => {
         expect(atom.workspace.getActiveTextEditor().getGrammar()).not.toBe(grammar);
       });
     });
+
+    it("correctly matches contexts at end of line", () => {
+      let {tokens} = grammar.tokenizeLine("(A) Thank Mom for the meatballs @phone");
+      for (var i = 0; i < tokens.length; i++) {
+        console.log(i + ":" + JSON.stringify(tokens[i]));
+      }
+      expect(tokens[3]).toEqual({value: "@phone", scopes: ["text.todotxt", "entity.name.tag.todotxt.context"]});
+    });
+
+    it("correctly matches contexts mid-line", () => {
+      let {tokens} = grammar.tokenizeLine("(A) Call Mom +Family +PeaceLoveAndHappiness @iphone @phone");
+      for (var i = 0; i < tokens.length; i++) {
+        console.log(i + ":" + JSON.stringify(tokens[i]));
+      }
+      expect(tokens[6]).toEqual({value: "@iphone", scopes: ["text.todotxt", "entity.name.tag.todotxt.context"]});
+    });
+
+    it("does not overmatch email addresses as contexts", () => {
+      let {tokens} = grammar.tokenizeLine("Email user@example.com");
+      expect(tokens[0]).toEqual({value: "Email user@example.com", scopes: ["text.todotxt"]});
+    });
 });

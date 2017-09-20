@@ -17,8 +17,12 @@
     'name': 'constant.language.todotxt.due'
   }
   {
-    'match': '\\@\\S*'
-    'name': 'entity.name.tag.todotxt.context'
+    'match': ' (\\@\\S*)'
+    'captures': {
+      '1': {
+        'name': 'entity.name.tag.todotxt.context'
+      }
+    }
   }
   {
     'match': '\\+\\S*'
