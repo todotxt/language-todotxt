@@ -95,4 +95,30 @@ describe("language-todotxt", () => {
       let {tokens} = grammar.tokenizeLine("Email user@example.com");
       expect(tokens[0]).toEqual({value: "Email user@example.com", scopes: ["text.todotxt"]});
     });
+
+    it("correctly matches projects at end of line", () => {
+      let {tokens} = grammar.tokenizeLine("Post signs around the neighborhood +GarageSale");
+      let matches = tokens.filter((token) => { return token.value == "+GarageSale"; });
+      expect(matches.length).toEqual(1);
+      expect(matches[0].scopes).toEqual(["text.todotxt", "entity.name.tag.todotxt.project"]);
+    });
+
+    it("correctly matches projects mid-line", () => {
+      let {tokens} = grammar.tokenizeLine("(A) Call Mom +Family +PeaceLoveAndHappiness @iphone @phone");
+      let matches = tokens.filter((token) => { return token.value == "+Family"; });
+      expect(matches.length).toEqual(1);
+      expect(matches[0].scopes).toEqual(["text.todotxt", "entity.name.tag.todotxt.project"]);
+    });
+
+    it("does not overmatch Google+ as a project", () => {
+      let {tokens} = grammar.tokenizeLine("(B) 2017-06-17 set up Google+ +HG");
+      let matches = tokens.filter((token) => { return token.value == "+"; });
+      expect(matches.length).toEqual(0);
+    });
+
+    it("does not overmatch addition as a project", () => {
+      let {tokens} = grammar.tokenizeLine("Learn how to add 2+2");
+      let matches = tokens.filter((token) => { return token.value == "+2"; });
+      expect(matches.length).toEqual(0);
+    });
 });
