@@ -27,7 +27,7 @@
 
 "use babel";
 
-describe("language-todotxt", () => {
+describe("todo.txt grammar", () => {
 
     let grammar = null;
 
