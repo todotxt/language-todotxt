@@ -103,4 +103,20 @@ describe("todo.txt commands", () => {
     expect(text).toEqual(`x ${now} todotxt:done with a priority and no start date +LanguageTodotxt pri:D`);
   });
 
+  it("is idempotent for a line that is already marked as done", () => {
+
+    const getCurrentLine = (te) => {
+      let pt = te.getCursorBufferPosition();
+      return te.lineTextForBufferRow(pt.row);
+    };
+
+    let te = atom.workspace.getActiveTextEditor();
+    te.moveDown(8);
+    let text = getCurrentLine(te);
+    expect(text).toEqual("x 2017-10-19 todotxt:done on a line that is already done +LanguageTodotxt");
+    atom.commands.dispatch(workspaceElement(), 'todotxt:done');
+    text = getCurrentLine(te);
+    expect(text).toEqual("x 2017-10-19 todotxt:done on a line that is already done +LanguageTodotxt");
+  });
+
 });

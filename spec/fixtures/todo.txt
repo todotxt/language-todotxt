@@ -6,3 +6,4 @@ Post signs around the neighborhood +GarageSale
 (A) 2017-10-17 Implement the todotxt:done command +LanguageTodotxt
 2017-10-19 todotxt:done without a priority +LanguageTodotxt
 (D) todotxt:done with a priority and no start date +LanguageTodotxt
+x 2017-10-19 todotxt:done on a line that is already done +LanguageTodotxt
