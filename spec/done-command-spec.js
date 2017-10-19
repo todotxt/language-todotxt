@@ -1,6 +1,4 @@
-'use babel'
-
-// langauge-todotxt.js -- main module for language-todotxt
+// done-command-spec.js -- Test the main module for the project
 //
 // Copyright (c) 2017, Evan Prodromou <evan@prodromou.name>
 // All rights reserved.
@@ -27,36 +25,45 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 // SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import { CompositeDisposable } from 'atom'
+"use babel";
 
-export default {
+describe("todo.txt commands", () => {
 
-  activate() {
-    this.subscriptions = new CompositeDisposable()
+  const workspaceElement = () => {
+    return atom.views.getView(atom.workspace)
+  };
 
-    this.subscriptions.add(atom.commands.add('atom-workspace', {
-      'todotxt:done': () => this.done()
-    }))
-  },
+  beforeEach(() => {
+    waitsForPromise(() => {
+      return atom.workspace.open("todo.txt");
+    });
 
-  deactivate() {
-    this.subscriptions.dispose()
-  },
+    waitsForPromise(() => {
+      return atom.packages.activatePackage("language-todotxt");
+    });
+  });
 
-  done() {
-    let te = atom.workspace.getActiveTextEditor()
-    let pt = te.getCursorBufferPosition()
-    let line = te.lineTextForBufferRow(pt.row)
-    let pm = line.match(/^\(([A-Z])\) /)
-    if (pm) {
-      let pri = pm[1]
-      line = `${line.substr(pm[0].length)} pri:${pri}`
-    }
-    let dt = new Date()
-    let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`
-    line = `x ${now} ${line}`
-    te.moveToBeginningOfLine()
-    te.deleteToEndOfLine()
-    te.insertText(line)
-  }
-}
+  it("has a todotxt:done command", () => {
+    let commands = atom.commands.findCommands({target: workspaceElement()});
+    let doneCommand = commands.find((command) => { return command.name === "todotxt:done" });
+    expect(doneCommand).not.toBeUndefined();
+  });
+
+  it("marks a line as done", () => {
+
+    const getCurrentLine = (te) => {
+      let pt = te.getCursorBufferPosition();
+      return te.lineTextForBufferRow(pt.row);
+    };
+
+    let te = atom.workspace.getActiveTextEditor();
+    te.moveDown(5);
+    let text = getCurrentLine(te);
+    expect(text).toEqual("(A) 2017-10-17 Implement the todotxt:done command +LanguageTodotxt");
+    atom.commands.dispatch(workspaceElement(), 'todotxt:done');
+    text = getCurrentLine(te);
+    let dt = new Date();
+    let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
+    expect(text).toEqual(`x ${now} 2017-10-17 Implement the todotxt:done command +LanguageTodotxt pri:A`);
+  });
+});
