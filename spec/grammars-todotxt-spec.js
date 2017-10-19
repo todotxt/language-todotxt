@@ -126,4 +126,26 @@ describe("todo.txt grammar", () => {
       let matches = tokens.filter((token) => { return token.value == "+2"; });
       expect(matches.length).toEqual(0);
     });
+
+    it("matches key:value properties correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for key:value pairs");
+      let [keyToken] = tokens.filter((token) => { return token.value == "key"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "property.language.todotxt.key"])
+      let [colonToken] = tokens.filter((token) => { return token.value == ":"; });
+      expect(colonToken.scopes).toEqual(["text.todotxt", "punctuation.language.todotxt.pair"])
+      let [valueToken] = tokens.filter((token) => { return token.value == "value"; });
+      expect(valueToken.scopes).toEqual(["text.todotxt", "value.language.todotxt.value"])
+    });
+
+    it("matches complex key:value correctly", () => {
+      let {tokens} = grammar.tokenizeLine("(B) 2017-09-20 Syntax highlighting for key:value metadata issue:todotxt/language-todotxt#42 +LanguageTodotxt +110");
+      console.log(JSON.stringify(tokens))
+      let [keyToken] = tokens.filter((token) => { return token.value == "issue"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "property.language.todotxt.key"])
+      let [colonToken] = tokens.filter((token) => { return token.value == ":"; });
+      expect(colonToken.scopes).toEqual(["text.todotxt", "punctuation.language.todotxt.pair"])
+      let [valueToken] = tokens.filter((token) => { return token.value == "todotxt/language-todotxt#42"; });
+      expect(valueToken.scopes).toEqual(["text.todotxt", "value.language.todotxt.value"])
+    });
+
 });

@@ -8,7 +8,21 @@
     'name': 'constant.language.todotxt.priority'
   }
   {
-    'match': '(?:^|t:|(?<=^\\([A-Z]\\)\\s))\\d{4}-\\d{2}-\\d{2}'
+    'match': '(\\S+)(:)(\\S+)'
+    'captures': {
+      '1': {
+        'name': 'property.language.todotxt.key'
+      }
+      '2': {
+        'name': 'punctuation.language.todotxt.pair'
+      }
+      '3': {
+        'name': 'value.language.todotxt.value'
+      }
+    }
+  }
+  {
+    'match': '\b\\d{4}-\\d{2}-\\d{2}\b'
     'name': 'constant.language.todotxt.date'
   }
   {
