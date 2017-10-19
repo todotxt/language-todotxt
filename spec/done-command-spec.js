@@ -84,4 +84,23 @@ describe("todo.txt commands", () => {
     let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
     expect(text).toEqual(`x ${now} 2017-10-19 todotxt:done without a priority +LanguageTodotxt`);
   });
+
+  it("marks a line with a priority and no start date as done", () => {
+
+    const getCurrentLine = (te) => {
+      let pt = te.getCursorBufferPosition();
+      return te.lineTextForBufferRow(pt.row);
+    };
+
+    let te = atom.workspace.getActiveTextEditor();
+    te.moveDown(7);
+    let text = getCurrentLine(te);
+    expect(text).toEqual("(D) todotxt:done with a priority and no start date +LanguageTodotxt");
+    atom.commands.dispatch(workspaceElement(), 'todotxt:done');
+    text = getCurrentLine(te);
+    let dt = new Date();
+    let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
+    expect(text).toEqual(`x ${now} todotxt:done with a priority and no start date +LanguageTodotxt pri:D`);
+  });
+
 });
