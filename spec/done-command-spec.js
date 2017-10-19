@@ -27,7 +27,7 @@
 
 "use babel";
 
-describe("todo.txt commands", () => {
+describe("todo.txt done command", () => {
 
   const workspaceElement = () => {
     return atom.views.getView(atom.workspace)
