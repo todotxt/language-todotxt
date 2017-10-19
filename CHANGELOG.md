@@ -1,3 +1,9 @@
+# language-todotxt changelog
+
+## 1.1.0
+* `todotxt:done` command to mark a task as done
+* `todotxt:add` command to create a new task
+
 ## 1.0.2
 * Don't overmatch empty @ symbol
 
