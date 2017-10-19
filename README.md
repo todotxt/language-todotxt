@@ -15,8 +15,10 @@ bundle](https://github.com/sideshowcoder/tmTodoTXT).
 
 ## License
 
-Copyright (c) 2011, Philipp Fehre <philipp.fehre@gmail.com> All rights reserved.\
-Copyright (c) 2014, 2017, Brandon Padgett <gerane@gmail.com> All rights reserved.\
+Copyright (c) 2011, Philipp Fehre <philipp.fehre@gmail.com> All rights reserved.
+
+Copyright (c) 2014, 2017, Brandon Padgett <gerane@gmail.com> All rights reserved.
+
 Copyright (c) 2017, Evan Prodromou <evan@prodromou.name> All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
