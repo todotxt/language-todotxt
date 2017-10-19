@@ -49,7 +49,7 @@ describe("todo.txt commands", () => {
     expect(doneCommand).not.toBeUndefined();
   });
 
-  it("marks a line as done", () => {
+  it("marks a line with a priority as done", () => {
 
     const getCurrentLine = (te) => {
       let pt = te.getCursorBufferPosition();
@@ -65,5 +65,23 @@ describe("todo.txt commands", () => {
     let dt = new Date();
     let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
     expect(text).toEqual(`x ${now} 2017-10-17 Implement the todotxt:done command +LanguageTodotxt pri:A`);
+  });
+
+  it("marks a line without a priority as done", () => {
+
+    const getCurrentLine = (te) => {
+      let pt = te.getCursorBufferPosition();
+      return te.lineTextForBufferRow(pt.row);
+    };
+
+    let te = atom.workspace.getActiveTextEditor();
+    te.moveDown(6);
+    let text = getCurrentLine(te);
+    expect(text).toEqual("2017-10-19 todotxt:done without a priority +LanguageTodotxt");
+    atom.commands.dispatch(workspaceElement(), 'todotxt:done');
+    text = getCurrentLine(te);
+    let dt = new Date();
+    let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
+    expect(text).toEqual(`x ${now} 2017-10-19 todotxt:done without a priority +LanguageTodotxt`);
   });
 });

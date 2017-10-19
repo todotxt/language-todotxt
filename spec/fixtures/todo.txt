@@ -4,3 +4,4 @@ Post signs around the neighborhood +GarageSale
 @GroceryStore Eskimo pies
 (C) email user@example.com @computer
 (A) 2017-10-17 Implement the todotxt:done command +LanguageTodotxt
+2017-10-19 todotxt:done without a priority +LanguageTodotxt
