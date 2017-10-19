@@ -49,7 +49,7 @@ describe("todo.txt commands", () => {
     expect(doneCommand).not.toBeUndefined();
   });
 
-  it("marks a line with a priority as done", () => {
+  it("marks a line with a priority and with a start date as done", () => {
 
     const getCurrentLine = (te) => {
       let pt = te.getCursorBufferPosition();
@@ -67,7 +67,7 @@ describe("todo.txt commands", () => {
     expect(text).toEqual(`x ${now} 2017-10-17 Implement the todotxt:done command +LanguageTodotxt pri:A`);
   });
 
-  it("marks a line without a priority as done", () => {
+  it("marks a line without a priority and with a start date as done", () => {
 
     const getCurrentLine = (te) => {
       let pt = te.getCursorBufferPosition();
