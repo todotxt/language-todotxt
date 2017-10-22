@@ -119,4 +119,26 @@ describe("todo.txt done command", () => {
     expect(text).toEqual("x 2017-10-19 todotxt:done on a line that is already done +LanguageTodotxt");
   });
 
+  it("makes edits in a single transaction", () => {
+
+    const getCurrentLine = (te) => {
+      let pt = te.getCursorBufferPosition();
+      return te.lineTextForBufferRow(pt.row);
+    };
+
+    let te = atom.workspace.getActiveTextEditor();
+    te.moveDown(5);
+    let text = getCurrentLine(te);
+    expect(text).toEqual("(A) 2017-10-17 Implement the todotxt:done command +LanguageTodotxt");
+    atom.commands.dispatch(workspaceElement(), 'todotxt:done');
+    text = getCurrentLine(te);
+    let dt = new Date();
+    let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
+    expect(text).toEqual(`x ${now} 2017-10-17 Implement the todotxt:done command +LanguageTodotxt pri:A`);
+
+    te.undo();
+    text = getCurrentLine(te);
+    expect(text).toEqual("(A) 2017-10-17 Implement the todotxt:done command +LanguageTodotxt");
+  });
+
 });
