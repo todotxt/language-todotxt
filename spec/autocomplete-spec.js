@@ -39,10 +39,9 @@ describe("todo.txt autocompletion", () => {
     return te.lineTextForBufferRow(pt.row)
   }
 
-  const suggestionsForPrefix = (provider, editor, prefix, options) => {
+  const suggestionsForPrefix = (provider, editor, options) => {
     let bufferPosition = editor.getCursorBufferPosition()
-    let scopeDescriptor = editor.getLastCursor().getScopeDescriptor()
-    let suggestions = provider.getSuggestions({editor, bufferPosition, prefix, scopeDescriptor, activatedManually: (options && options.activatedManually)})
+    let suggestions = provider.getSuggestions({editor, bufferPosition, activatedManually: (options && options.activatedManually)})
     if (options && options.raw) {
       return suggestions
     } else {
@@ -71,7 +70,7 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "", { activatedManually: true })).toEqual([
+    expect(suggestionsForPrefix(provider, te, { activatedManually: true })).toEqual([
       "@computer",
       "+GarageSale",
       "@GroceryStore",
@@ -85,7 +84,7 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "", { activatedManually: false })).toEqual([])
+    expect(suggestionsForPrefix(provider, te, { activatedManually: false })).toEqual([])
   })
 
   it("labels suggestions correctly", () => {
@@ -93,7 +92,7 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    let suggestions = suggestionsForPrefix(provider, te, "", { activatedManually: true, raw: true })
+    let suggestions = suggestionsForPrefix(provider, te, { activatedManually: true, raw: true })
     expect(suggestions[0].text).toEqual("@computer")
     expect(suggestions[0].type).toEqual("tag")
     expect(suggestions[0].rightLabel).toEqual("Context")
@@ -120,7 +119,8 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "+")).toEqual([
+    editor.insertText("+")
+    expect(suggestionsForPrefix(provider, te)).toEqual([
       "+GarageSale",
       "+LanguageTodotxt"
     ])
@@ -131,7 +131,8 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "@")).toEqual([
+    editor.insertText("@")
+    expect(suggestionsForPrefix(provider, te)).toEqual([
       "@computer",
       "@GroceryStore",
       "@phone"
@@ -143,7 +144,8 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "@G")).toEqual([
+    editor.insertText("@G")
+    expect(suggestionsForPrefix(provider, te)).toEqual([
       "@GroceryStore"
     ])
   })
@@ -153,7 +155,8 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "+La")).toEqual([
+    editor.insertText("+La")
+    expect(suggestionsForPrefix(provider, te)).toEqual([
       "@LanguageTodotxt"
     ])
   })
