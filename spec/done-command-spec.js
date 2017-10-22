@@ -136,7 +136,7 @@ describe("todo.txt done command", () => {
     let now = `${dt.getFullYear()}-${(dt.getMonth() < 8) ? '0' : ''}${dt.getMonth() + 1}-${dt.getDate() < 10 ? '0' : ''}${dt.getDate()}`;
     expect(text).toEqual(`x ${now} 2017-10-17 Implement the todotxt:done command +LanguageTodotxt pri:A`);
 
-    te.undo();
+    atom.commands.dispatch(workspaceElement(), 'core:undo');
     expect(text).toEqual("(A) 2017-10-17 Implement the todotxt:done command +LanguageTodotxt");
   });
 
