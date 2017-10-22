@@ -27,21 +27,6 @@
 
 "use babel";
 
-let suggestionsForPrefix = (provider, editor, prefix, options) => {
-  let bufferPosition = editor.getCursorBufferPosition()
-  let scopeDescriptor = editor.getLastCursor().getScopeDescriptor()
-  let suggestions = provider.getSuggestions({editor, bufferPosition, prefix, scopeDescriptor})
-  if (options && options.raw) {
-    return suggestions
-  } else {
-    if (suggestions) {
-      return (suggestions.map((sug) => sug.text))
-    } else {
-      return []
-    }
-  }
-}
-
 describe("todo.txt autocompletion", () => {
   var provider
 
@@ -52,6 +37,21 @@ describe("todo.txt autocompletion", () => {
   const getCurrentLine = (te) => {
     let pt = te.getCursorBufferPosition()
     return te.lineTextForBufferRow(pt.row)
+  }
+
+  const suggestionsForPrefix = (provider, editor, prefix, options) => {
+    let bufferPosition = editor.getCursorBufferPosition()
+    let scopeDescriptor = editor.getLastCursor().getScopeDescriptor()
+    let suggestions = provider.getSuggestions({editor, bufferPosition, prefix, scopeDescriptor, activatedManually: (options && options.activatedManually)})
+    if (options && options.raw) {
+      return suggestions
+    } else {
+      if (suggestions) {
+        return (suggestions.map((sug) => sug.text))
+      } else {
+        return []
+      }
+    }
   }
 
   beforeEach(() => {
@@ -66,12 +66,12 @@ describe("todo.txt autocompletion", () => {
     })
   })
 
-  it("finds all suggestions with no prefix", () => {
+  it("finds all suggestions when activated manually with no prefix", () => {
     let te = atom.workspace.getActiveTextEditor()
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "")).toEqual([
+    expect(suggestionsForPrefix(provider, te, "", { activatedManually: true })).toEqual([
       "@computer",
       "+GarageSale",
       "@GroceryStore",
@@ -80,4 +80,11 @@ describe("todo.txt autocompletion", () => {
     ])
   })
 
+  it("finds no suggestions with no prefix", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
+    expect(suggestionsForPrefix(provider, te, "", { activatedManually: true })).toEqual([])
+  })
 })
