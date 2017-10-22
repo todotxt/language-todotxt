@@ -85,6 +85,6 @@ describe("todo.txt autocompletion", () => {
     te.moveDown(9)
     let text = getCurrentLine(te)
     expect(text).toEqual("")
-    expect(suggestionsForPrefix(provider, te, "", { activatedManually: true })).toEqual([])
+    expect(suggestionsForPrefix(provider, te, "", { activatedManually: false })).toEqual([])
   })
 })
