@@ -157,7 +157,7 @@ describe("todo.txt autocompletion", () => {
     expect(text).toEqual("")
     te.insertText("+La")
     expect(suggestionsForPrefix(provider, te)).toEqual([
-      "@LanguageTodotxt"
+      "+LanguageTodotxt"
     ])
   })
 })
