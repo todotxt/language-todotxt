@@ -160,4 +160,48 @@ describe("todo.txt autocompletion", () => {
       "+LanguageTodotxt"
     ])
   })
+
+  it("finds does not suggest tags that are already on the current line", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(1)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("(B) Schedule Goodwill pickup +GarageSale @phone")
+    te.moveToEndOfLine()
+    te.insertText(" ")
+    expect(suggestionsForPrefix(provider, te, { activatedManually: true })).toEqual([
+      "@computer",
+      "@GroceryStore",
+      "+LanguageTodotxt"
+    ])
+  })
+
+  it("finds does not suggest tags that are already on the current line", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(1)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("(B) Schedule Goodwill pickup +GarageSale @phone")
+    te.moveToEndOfLine()
+    te.insertText(" ")
+    expect(suggestionsForPrefix(provider, te, { activatedManually: true })).toEqual([
+      "@computer",
+      "@GroceryStore",
+      "+LanguageTodotxt"
+    ])
+  })
+
+  it("finds does not filter out non-tags on the current line", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    let text = getCurrentLine(te)
+    expect(text).toEqual("(A) Thank Mom for the meatballs @phone")
+    te.moveToEndOfLine()
+    te.insertText(" @example.com")
+    te.moveDown(4)
+    text = getCurrentLine(te)
+    expect(text).toEqual("(C) email user@example.com @computer")
+    te.moveToEndOfLine()
+    te.insertText(" @e")
+    expect(suggestionsForPrefix(provider, te)).toEqual([
+      "@example.com"
+    ])
+  })
 })
