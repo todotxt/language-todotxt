@@ -87,4 +87,74 @@ describe("todo.txt autocompletion", () => {
     expect(text).toEqual("")
     expect(suggestionsForPrefix(provider, te, "", { activatedManually: false })).toEqual([])
   })
+
+  it("labels suggestions correctly", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
+    let suggestions = suggestionsForPrefix(provider, te, "", { activatedManually: true, raw: true })
+    expect(suggestions[0].text).toEqual("@computer")
+    expect(suggestions[0].type).toEqual("tag")
+    expect(suggestions[0].rightLabel).toEqual("Context")
+
+    expect(suggestions[1].text).toEqual("+GarageSale")
+    expect(suggestions[1].type).toEqual("tag")
+    expect(suggestions[1].rightLabel).toEqual("Project")
+
+    expect(suggestions[2].text).toEqual("@GroceryStore")
+    expect(suggestions[2].type).toEqual("tag")
+    expect(suggestions[2].rightLabel).toEqual("Context")
+
+    expect(suggestions[3].text).toEqual("+LanguageTodotxt")
+    expect(suggestions[3].type).toEqual("tag")
+    expect(suggestions[3].rightLabel).toEqual("Project")
+
+    expect(suggestions[4].text).toEqual("@phone")
+    expect(suggestions[4].type).toEqual("tag")
+    expect(suggestions[4].rightLabel).toEqual("Context")
+  })
+
+  it("finds all projects with + prefix", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
+    expect(suggestionsForPrefix(provider, te, "+")).toEqual([
+      "+GarageSale",
+      "+LanguageTodotxt"
+    ])
+  })
+
+  it("finds all contexts with @ prefix", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
+    expect(suggestionsForPrefix(provider, te, "@")).toEqual([
+      "@computer",
+      "@GroceryStore",
+      "@phone"
+    ])
+  })
+
+  it("finds only matching contexts with @G prefix", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
+    expect(suggestionsForPrefix(provider, te, "@G")).toEqual([
+      "@GroceryStore"
+    ])
+  })
+
+  it("finds only matching projects with +La prefix", () => {
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
+    expect(suggestionsForPrefix(provider, te, "+La")).toEqual([
+      "@LanguageTodotxt"
+    ])
+  })
 })
