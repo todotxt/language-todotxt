@@ -43,36 +43,41 @@ let suggestionsForPrefix = (provider, editor, prefix, options) => {
 }
 
 describe("todo.txt autocompletion", () => {
-  var provider;
+  var provider
 
   const workspaceElement = () => {
     return atom.views.getView(atom.workspace)
-  };
+  }
+
+  const getCurrentLine = (te) => {
+    let pt = te.getCursorBufferPosition()
+    return te.lineTextForBufferRow(pt.row)
+  }
 
   beforeEach(() => {
     waitsForPromise(() => {
-      return atom.workspace.open("todo.txt");
-    });
+      return atom.workspace.open("todo.txt")
+    })
 
     waitsForPromise(() => {
       return atom.packages.activatePackage("language-todotxt").then(package => {
-        provider = package.mainModule.getAutocompleteProvider();
-      });
-    });
-  });
+        provider = package.mainModule.getAutocompleteProvider()
+      })
+    })
+  })
 
   it("finds all suggestions with no prefix", () => {
-    let te = atom.workspace.getActiveTextEditor();
-    te.moveDown(9);
-    let text = getCurrentLine(te);
-    expect(text).toEqual("");
+    let te = atom.workspace.getActiveTextEditor()
+    te.moveDown(9)
+    let text = getCurrentLine(te)
+    expect(text).toEqual("")
     expect(suggestionsForPrefix(provider, te, "")).toEqual([
       "@computer",
       "+GarageSale",
       "@GroceryStore",
       "+LanguageTodotxt",
       "@phone"
-    ]);
-  });
+    ])
+  })
 
-});
+})
