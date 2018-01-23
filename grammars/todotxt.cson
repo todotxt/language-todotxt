@@ -49,5 +49,9 @@
     'match': '^x\\s.*$'
     'name': 'comment.line.todotxt'
   }
+  {
+    'match': '^\\s.+\\-x\\s.*$'
+    'name': 'comment.line.todotxt'
+  }
 ]
 'scopeName': 'text.todotxt'
