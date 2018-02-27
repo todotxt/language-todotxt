@@ -148,4 +148,17 @@ describe("todo.txt grammar", () => {
       expect(valueToken.scopes).toEqual(["text.todotxt", "value.language.todotxt.value"])
     });
 
+    it("matches create date without priority", () => {
+      let {tokens} = grammar.tokenizeLine("2018-02-27 match create date without priority");
+      console.log(JSON.stringify(tokens))
+      let [token] = tokens.filter((token) => { return token.value == "2018-02-27"; });
+      expect(token.scopes).toEqual(["text.todotxt", "constant.language.todotxt.date"])
+    });
+
+    it("matches create date with priority", () => {
+      let {tokens} = grammar.tokenizeLine("(B) 2018-02-27 match create date with priority");
+      console.log(JSON.stringify(tokens))
+      let [token] = tokens.filter((token) => { return token.value == "2018-02-27"; });
+      expect(token.scopes).toEqual(["text.todotxt", "constant.language.todotxt.date"])
+    });
 });

@@ -22,7 +22,7 @@
     }
   }
   {
-    'match': '\b\\d{4}-\\d{2}-\\d{2}\b'
+    'match': '(?:^|(?<=^\\([A-Z]\\)\\s))\\d{4}-\\d{2}-\\d{2}'
     'name': 'constant.language.todotxt.date'
   }
   {
