@@ -19,7 +19,7 @@ Copyright (c) 2011, Philipp Fehre <philipp.fehre@gmail.com> All rights reserved.
 
 Copyright (c) 2014, 2017, Brandon Padgett <gerane@gmail.com> All rights reserved.
 
-Copyright (c) 2017, Evan Prodromou <evan@prodromou.name> All rights reserved.
+Copyright (c) 2017, 2018 Evan Prodromou <evan@prodromou.name> All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -46,6 +46,21 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 This project has adopted a [code of conduct](https://github.com/todotxt/language-todotxt/blob/master/CODE_OF_CONDUCT.md)
 in order to be welcoming to all participants.
+
+## Commands
+
+When you are in todo.txt mode, you have access to the following commands:
+
+- `todotxt:add`: add a new task on the line below the current line
+- `todotxt:done`: mark the task on the current line done
+- `todotxt:priority-a` set the priority of the current task to A
+- `todotxt:priority-b` set the priority of the current task to B
+- `todotxt:priority-c` set the priority of the current task to C
+- ... (same thing for D-Y)
+- `todotxt:priority-z` set the priority of the current task to Z
+
+There is also an autocompletion function when you are typing out a context or
+a priority.
 
 ## Useful packages for todo.txt files
 
