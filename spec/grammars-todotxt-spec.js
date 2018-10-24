@@ -127,6 +127,12 @@ describe("todo.txt grammar", () => {
       expect(matches.length).toEqual(0);
     });
 
+    it("matches due:yyyy-mm-dd properties correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for due:2018-10-23 metadata");
+      let [keyValueToken] = tokens.filter((token) => { return token.value == "due:2018-10-23"; });
+      expect(keyValueToken.scopes).toEqual(["text.todotxt", "constant.language.todotxt.due"])
+    });
+
     it("matches key:value properties correctly", () => {
       let {tokens} = grammar.tokenizeLine("Syntax colorisation for key:value pairs");
       let [keyToken] = tokens.filter((token) => { return token.value == "key"; });
