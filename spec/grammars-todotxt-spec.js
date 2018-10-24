@@ -154,6 +154,17 @@ describe("todo.txt grammar", () => {
       expect(valueToken.scopes).toEqual(["text.todotxt", "value.language.todotxt.value"])
     });
 
+    it("matches key:yyyy-mm-dd correctly", () => {
+      let {tokens} = grammar.tokenizeLine("(B) 2017-09-20 Syntax highlighting for key:2018-10-23 metadata +LanguageTodotxt +110");
+      console.log(JSON.stringify(tokens))
+      let [keyToken] = tokens.filter((token) => { return token.value == "key"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "property.language.todotxt.key"])
+      let [colonToken] = tokens.filter((token) => { return token.value == ":"; });
+      expect(colonToken.scopes).toEqual(["text.todotxt", "punctuation.language.todotxt.pair"])
+      let [valueToken] = tokens.filter((token) => { return token.value == "2018-10-23"; });
+      expect(valueToken.scopes).toEqual(["text.todotxt", "constant.language.todotxt.date"])
+    });
+
     it("matches create date without priority", () => {
       let {tokens} = grammar.tokenizeLine("2018-02-27 match create date without priority");
       console.log(JSON.stringify(tokens))
