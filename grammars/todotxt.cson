@@ -1,4 +1,5 @@
 'fileTypes': [
+  'done.txt',
   'todo.txt'
 ]
 'name': 'TodoTXT'
