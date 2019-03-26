@@ -61,7 +61,7 @@ describe("todo.txt grammar", () => {
       });
 
       runs(() => {
-        expect(atom.workspace.getActiveTextEditor().getGrammar()).not.toBe(grammar);
+        expect(atom.workspace.getActiveTextEditor().getGrammar()).toBe(grammar);
       });
     });
 
