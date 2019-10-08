@@ -148,6 +148,42 @@ describe("todo.txt grammar", () => {
       expect(valueToken.scopes).toEqual(["text.todotxt", "value.language.todotxt.value"])
     });
 
+    it("matches HTTP URLs correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for http://www.example.com/some/url?name=value&another=one links");
+      let [keyToken] = tokens.filter((token) => { return token.value == "http://www.example.com/some/url?name=value&another=one"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "markup.language.todotxt.underline.link"])
+    });
+
+    it("matches HTTPS URLs correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for https://www.example.com/some/url?name=value&another=one links");
+      let [keyToken] = tokens.filter((token) => { return token.value == "https://www.example.com/some/url?name=value&another=one"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "markup.language.todotxt.underline.link"])
+    });
+
+    it("matches domain-only URLs correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for https://www.example.com links");
+      let [keyToken] = tokens.filter((token) => { return token.value == "https://www.example.com"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "markup.language.todotxt.underline.link"])
+    });
+
+    it("matches URLs with port number correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for https://www.example.com:443/ links");
+      let [keyToken] = tokens.filter((token) => { return token.value == "https://www.example.com:443/"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "markup.language.todotxt.underline.link"])
+    });
+
+    it("matches URLs with IP address and port number correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for http://192.168.0.1:8000 links");
+      let [keyToken] = tokens.filter((token) => { return token.value == "http://192.168.0.1:8000"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "markup.language.todotxt.underline.link"])
+    });
+
+    it("matches single-level domain URLs correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for http://localhost links");
+      let [keyToken] = tokens.filter((token) => { return token.value == "http://localhost"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "markup.language.todotxt.underline.link"])
+    });
+
     it("matches create date without priority", () => {
       let {tokens} = grammar.tokenizeLine("2018-02-27 match create date without priority");
       console.log(JSON.stringify(tokens))
