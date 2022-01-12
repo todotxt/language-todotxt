@@ -8,6 +8,10 @@
     'name': 'constant.language.todotxt.priority'
   }
   {
+    'match': '[Hh][Tt][Tt][Pp][Ss]?://\\w+(\\.\\w+)*(:\\d{1,4})?(/\\S*)?'
+    'name': 'markup.language.todotxt.underline.link'
+  }
+  {
     'match': '(\\S+)(:)(\\S+)'
     'captures': {
       '1': {
