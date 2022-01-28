@@ -1,6 +1,7 @@
 # language-todotxt package
 
 [![Todo.txt](http://todotxt.org/images/todotxt_logo_2012.png)](http://todotxt.org/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftodotxt%2Flanguage-todotxt.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftodotxt%2Flanguage-todotxt?ref=badge_shield)
 
 This package adds syntax highlighting to [todo.txt](http://todotxt.org/) files
 in the [Atom](https://atom.io/) text editor.
@@ -41,6 +42,9 @@ PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
 LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
 OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftodotxt%2Flanguage-todotxt.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftodotxt%2Flanguage-todotxt?ref=badge_large)
 
 ## Code of conduct
 
