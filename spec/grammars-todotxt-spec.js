@@ -127,6 +127,12 @@ describe("todo.txt grammar", () => {
       expect(matches.length).toEqual(0);
     });
 
+    it("matches due:yyyy-mm-dd properties correctly", () => {
+      let {tokens} = grammar.tokenizeLine("Syntax colorisation for due:2018-10-23 metadata");
+      let [keyValueToken] = tokens.filter((token) => { return token.value == "due:2018-10-23"; });
+      expect(keyValueToken.scopes).toEqual(["text.todotxt", "constant.language.todotxt.due"])
+    });
+
     it("matches key:value properties correctly", () => {
       let {tokens} = grammar.tokenizeLine("Syntax colorisation for key:value pairs");
       let [keyToken] = tokens.filter((token) => { return token.value == "key"; });
@@ -146,6 +152,17 @@ describe("todo.txt grammar", () => {
       expect(colonToken.scopes).toEqual(["text.todotxt", "punctuation.language.todotxt.pair"])
       let [valueToken] = tokens.filter((token) => { return token.value == "todotxt/language-todotxt#42"; });
       expect(valueToken.scopes).toEqual(["text.todotxt", "value.language.todotxt.value"])
+    });
+
+    it("matches key:yyyy-mm-dd correctly", () => {
+      let {tokens} = grammar.tokenizeLine("(B) 2017-09-20 Syntax highlighting for key:2018-10-23 metadata +LanguageTodotxt +110");
+      console.log(JSON.stringify(tokens))
+      let [keyToken] = tokens.filter((token) => { return token.value == "key"; });
+      expect(keyToken.scopes).toEqual(["text.todotxt", "property.language.todotxt.key"])
+      let [colonToken] = tokens.filter((token) => { return token.value == ":"; });
+      expect(colonToken.scopes).toEqual(["text.todotxt", "punctuation.language.todotxt.pair"])
+      let [valueToken] = tokens.filter((token) => { return token.value == "2018-10-23"; });
+      expect(valueToken.scopes).toEqual(["text.todotxt", "constant.language.todotxt.date"])
     });
 
     it("matches create date without priority", () => {
